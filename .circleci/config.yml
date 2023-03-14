@@ -34,7 +34,7 @@ commands:
             aws s3 rm s3://udapeople-<< parameters.id >> --recursive
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.id >>
           environment:
-              TERM: xterm-256color
+            TERM: xterm-256color
 
   revert_migrations:
     description: Revert the last migration if successfully run in the current workflow.
@@ -49,10 +49,9 @@ commands:
           when: on_fail
           working_directory: ./backend
           command: |
-              npm run migrations:revert
+            npm run migrations:revert
 
 jobs:
-
   install-backend-dependencies:
     executor: node
     steps:
@@ -66,10 +65,9 @@ jobs:
           paths:
             - backend/node_modules
 
-
   install-frontend-dependencies:
-   executor: node
-   steps:
+    executor: node
+    steps:
       - checkout
       - run:
           name: npm install
@@ -79,7 +77,6 @@ jobs:
           root: .
           paths:
             - frontend/node_modules
-
 
   build-backend:
     executor: node
@@ -96,7 +93,6 @@ jobs:
           paths:
             - backend/dist
 
-
   build-frontend:
     executor: node
     steps:
@@ -107,7 +103,6 @@ jobs:
           name: npm run build
           working_directory: ./frontend
           command: npm run build
-
 
   test-frontend:
     executor: node
@@ -130,7 +125,6 @@ jobs:
       - store_artifacts:
           path: ./frontend/test_results
 
-
   test-backend:
     executor: node
     steps:
@@ -152,7 +146,6 @@ jobs:
       - store_artifacts:
           path: ./backend/test_results
 
-
   scan-frontend:
     executor: node
     steps:
@@ -168,7 +161,6 @@ jobs:
             npm audit fix --force
             npm audit --audit-level=critical
 
-
   scan-backend:
     executor: node
     steps:
@@ -177,13 +169,12 @@ jobs:
           at: .
       - run:
           name: Check Backend against security vulnerabilities
-          command: | 
+          command: |
             cd backend
             npm install
             npm audit fix --audit-level=critical --force
             npm audit fix --force
             npm audit --audit-level=critical
-
 
   deploy-infrastructure:
     executor: aws
@@ -227,13 +218,12 @@ jobs:
           id: ${CIRCLE_WORKFLOW_ID:0:5}
           when: on_fail
 
-
   configure-infrastructure:
     executor: python
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: ["e8:0e:77:6f:43:d0:2d:f7:ec:d1:63:8a:b5:76:60:68"]
+          fingerprints: ["53:81:67:31:3b:19:c6:ae:78:58:6a:47:b4:76:93:c1"]
       - attach_workspace:
           at: .
       - run:
@@ -253,7 +243,6 @@ jobs:
       - destroy_environment:
           id: ${CIRCLE_WORKFLOW_ID:0:5}
           when: on_fail
-
 
   run-migrations:
     executor: node
@@ -275,7 +264,6 @@ jobs:
       - destroy_environment:
           id: ${CIRCLE_WORKFLOW_ID:0:5}
           when: on_fail
-
 
   deploy-frontend:
     executor: node
@@ -318,13 +306,12 @@ jobs:
           id: ${CIRCLE_WORKFLOW_ID:0:5}
           when: on_fail
 
-
   deploy-backend:
     executor: python
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: ["e8:0e:77:6f:43:d0:2d:f7:ec:d1:63:8a:b5:76:60:68"]
+          fingerprints: ["53:81:67:31:3b:19:c6:ae:78:58:6a:47:b4:76:93:c1"]
       - attach_workspace:
           at: .
       - run:
@@ -347,7 +334,6 @@ jobs:
       - revert_migrations:
           id: ${CIRCLE_WORKFLOW_ID:0:5}
           when: on_fail
-
 
   smoke-test:
     executor: python
@@ -390,7 +376,6 @@ jobs:
           id: ${CIRCLE_WORKFLOW_ID:0:5}
           when: on_fail
 
-
   cloudfront-update:
     executor: aws
     steps:
@@ -409,7 +394,6 @@ jobs:
               list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
               --no-paginate --output text >> old_workflow_id.txt
             cat old_workflow_id.txt
-            
 
       - run:
           name: Update cloudfront distribution
@@ -423,7 +407,6 @@ jobs:
       - revert_migrations:
           id: ${CIRCLE_WORKFLOW_ID:0:5}
           when: on_fail
-
 
   cleanup:
     executor: aws
@@ -474,7 +457,7 @@ workflows:
             - build-backend
       - test-frontend:
           requires:
-            -  build-frontend
+            - build-frontend
       - scan-backend:
           requires:
             - test-backend
@@ -484,11 +467,11 @@ workflows:
 
       ## INFRASTRUCTURE
       - deploy-infrastructure:
-          requires: [scan-frontend,scan-backend]
+          requires: [scan-frontend, scan-backend]
           filters:
             branches:
               only:
-                - master
+                - main
       - configure-infrastructure:
           requires:
             - deploy-infrastructure
