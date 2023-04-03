@@ -1,99 +1,46 @@
-# Frontend Boilerplate with React, Redux & TypeScript
+# Getting Started with Create React App
 
-A bare minimum react-redux-webpack-typescript boilerplate with TodoMVC example.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-[Live demo](https://rokoroku.github.io/react-redux-typescript-boilerplate)
+## Available Scripts
 
-Note that this project does not include **Server-Side Rendering**, **Static code analysis**, **Testing Frameworks** and other stuffs that makes the package unnecessarily complicated. (e.g. yarn, tslint, jest, ...)  
-If needed, please fork this repository and add your own that meets your requirements.
+In the project directory, you can run:
 
-Ideal for creating React apps from the scratch.
+### `npm start`
 
-See also: [react-mobx-typescript-boilerplate](https://github.com/rokoroku/react-mobx-typescript-boilerplate)
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Contains
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-- [x] [Typescript](https://www.typescriptlang.org/) 3
-- [x] [React](https://facebook.github.io/react/) 16.4
-- [x] [Redux](https://github.com/reactjs/redux) 4
-- [x] [React Router](https://github.com/ReactTraining/react-router) 4.3
-- [x] [React Router Redux](https://github.com/reactjs/react-router-redux) 5
-- [x] [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension)
-- [x] [TodoMVC example](http://todomvc.com)
+### `npm test`
 
-### Build tools
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-- [x] [Webpack](https://webpack.github.io) 4
-  - [x] [Tree Shaking](https://medium.com/@Rich_Harris/tree-shaking-versus-dead-code-elimination-d3765df85c80)
-  - [x] [Webpack Dev Server](https://github.com/webpack/webpack-dev-server)
-- [x] [Typescript Loader](https://github.com/TypeStrong/ts-loader)
-- [x] [PostCSS Loader](https://github.com/postcss/postcss-loader)
-  - [x] [PostCSS Preset Env](https://preset-env.cssdb.org/)
-  - [x] [CSS modules](https://github.com/css-modules/css-modules)
-- [x] [React Hot Loader](https://github.com/gaearon/react-hot-loader)
-- [x] [Mini CSS Extract Plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
-- [x] [HTML Webpack Plugin](https://github.com/ampedandwired/html-webpack-plugin)
-- [x] [Prettier](https://github.com/prettier/prettier)
+### `npm run build`
 
-## Setup
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-```
-$ npm install
-```
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-## Running
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-```
-$ npm start
-```
+### `npm run eject`
 
-## Build
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-```
-$ npm run build
-```
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-## Prettier
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-```
-$ npm run prettier
-```
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-# License
+## Learn More
 
-MIT
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-# Glee-Specific Config
-
-## Connecting to Backend
-
-During build, CRA will import the backend API url from `API_URL` which you can use via `process.env.API_URL`. To change the value of this locally, add that as an environment variable and set it to whatever you need. You can also create a `.env` file, of course.
-
-Example:
-
-```
-API_URL=http://localhost:3030
-```
-
-## Relative Paths in HTML
-
-When deploying to a folder instead of the root on a web server, you need paths to resources to be relative (ex: `./scripts` instead of `/scripts`). To force webpack to generate relative paths, add a `FRONTEND_URL` to your environment with the url to your application.
-
-## Logging
-
-We are using Loggly to track log messages remotely. If you want to send your logs to Loggly for some reason, you should configure the following variables in your environment (either with `.env` or in your operating system):
-
-```
-LOGGLY_SUBDOMAIN=yoursubdomain
-LOGGLY_TOKEN=yourlogglytoken
-LOGGLY_LEVEL=info
-```
-
-## E2E Tests with Ghost Inspector
-
-You will need the following env vars for Ghost Inspector tests to run in CI/CD:
-
-```
-GHOST_SUITE_ID=5bdb36e08faf2b12926e7cf4
-GHOST_API_KEY=da6f8fa10c129df055519e634530b531d3c068e5
-```
+To learn React, check out the [React documentation](https://reactjs.org/).
