@@ -1,25 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from "react";
+import "./App.css";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { RouterType } from "./shares/types";
+import { publicRoutes, privateRoutes } from "./routes";
 
 function App() {
+  const [cookie] = useCookies(["sessionId"]);
+  const location = useLocation();
+  let routers: RouterType[] = [];
+
+  const publicPaths: string[] = [];
+
+  for (let i = 0; i < publicRoutes.length; i++) {
+    publicPaths.push(publicRoutes[i].path);
+  }
+
+  if (!cookie.sessionId) {
+    if (publicPaths.includes(location.pathname)) {
+      routers = publicRoutes;
+    } else {
+      return <Navigate to="/login" />;
+    }
+  } else {
+    routers = [...privateRoutes, ...publicRoutes];
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      {routers.map((route: RouterType, index: number) => {
+        const { path, component, layout } = route;
+        const Page = component;
+        const Layout = layout || Fragment;
+        return (
+          <Route
+            path={path}
+            key={index}
+            element={
+              <Layout>
+                <Page />
+              </Layout>
+            }
+          />
+        );
+      })}
+    </Routes>
   );
 }
 

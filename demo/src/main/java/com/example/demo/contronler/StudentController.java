@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -22,13 +23,26 @@ public class StudentController {
 
     @PostMapping("/student")
     private  String createStudent(@RequestBody Student student){
+
         // Student student = new Student(  1,"le nhu tam", "soledad@gmail.com");
         studentService.create(student);
+        return "ok";
+    }
+
+    @PutMapping("/student")
+    private  String updateStudent(@RequestBody Student student){
+        // Student student = new Student(  1,"le nhu tam", "soledad@gmail.com");
+        studentService.update(student);
         return "ok";
     }
 
     @DeleteMapping("student")
     private Boolean deleteStudent(@RequestParam int studentId){
         return studentService.deleteStudent(studentId);
+    }
+
+    @GetMapping("student")
+    private Optional<Student> getStudent(@RequestParam int studentId){
+        return studentService.getStudentById(studentId);
     }
 }
