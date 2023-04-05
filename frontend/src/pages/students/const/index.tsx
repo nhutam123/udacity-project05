@@ -30,12 +30,20 @@ export const useConfigTable = (deleteStudent: (id: number) => void) => {
         <div>
           <Button
             type="primary"
-            onClick={() => deleteStudent(student.id)}
+            onClick={() => {
+              if (student.id) deleteStudent(student.id);
+            }}
             danger
           >
             Delete
           </Button>
-          <Button onClick={() => navigateToEditPage(student.id)}>Edit</Button>
+          <Button
+            onClick={() => {
+              if (student.id) navigateToEditPage(student.id);
+            }}
+          >
+            Edit
+          </Button>
         </div>
       ),
     },

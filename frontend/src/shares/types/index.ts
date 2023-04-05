@@ -7,7 +7,7 @@ export type RouterType = {
 };
 
 export type Student = {
-  id: number;
+  id?: number;
   name: string;
   email: string;
 };
