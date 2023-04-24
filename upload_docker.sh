@@ -4,11 +4,17 @@
 # Assumes that an image is built via `run_docker.sh`
 
 # Step 1:
-# build images from docker-compose.
-docker-compose build
+# Create dockerpath
+# dockerpath=<your docker ID/path>
+dockerpath=tamln2/my-project
+
 # Step 2:  
-# Authenticate 
+# Authenticate & tag
+echo "Docker ID and Image: $dockerpath"
 docker login -u tamln2
+docker tag my-project $dockerpath:latest
+
 # Step 3:
-# upload
-docker-compose push
+# Push image to a docker repository
+
+docker push $dockerpath:latest
