@@ -1,55 +1,46 @@
-<include a CircleCI status badge, here>
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/nhutam123/udacity-project04/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/nhutam123/udacity-project04/tree/main)
+# Getting Started with Create React App
 
-## Project Overview
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-tam
-In this project, you will apply the skills you have acquired in this course to operationalize a Machine Learning Microservice API.
+## Available Scripts
 
-You are given a pre-trained, `sklearn` model that has been trained to predict housing prices in Boston according to several features, such as average rooms in a home and data about highway access, teacher-to-pupil ratios, and so on. You can read more about the data, which was initially taken from Kaggle, on [the data source site](https://www.kaggle.com/c/boston-housing). This project tests your ability to operationalize a Python flask app—in a provided file, `app.py`—that serves out predictions (inference) about housing prices through API calls. This project could be extended to any pre-trained machine learning model, such as those for image recognition and data labeling.
+In the project directory, you can run:
 
-### Project Tasks
+### `npm start`
 
-Your project goal is to operationalize this working, machine learning microservice using [kubernetes](https://kubernetes.io/), which is an open-source system for automating the management of containerized applications. In this project you will:
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-- Test your project code using linting
-- Complete a Dockerfile to containerize this application
-- Deploy your containerized application using Docker and make a prediction
-- Improve the log statements in the source code for this application
-- Configure Kubernetes and create a Kubernetes cluster
-- Deploy a container using Kubernetes and make a prediction
-- Upload a complete Github repo with CircleCI to indicate that your code has been tested
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-You can find a detailed [project rubric, here](https://review.udacity.com/#!/rubrics/2576/view).
+### `npm test`
 
-**The final implementation of the project will showcase your abilities to operationalize production microservices.**
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
----
+### `npm run build`
 
-## Setup the Environment
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-- Create a virtualenv with Python 3.7 and activate it. Refer to this link for help on specifying the Python version in the virtualenv.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-```bash
-python3 -m pip install --user virtualenv
-# You should have Python 3.7 available in your host.
-# Check the Python path using `which python3`
-# Use a command similar to this one:
-python3 -m virtualenv --python=<path-to-Python3.7> .devops
-source .devops/bin/activate
-```
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-- Run `make install` to install the necessary dependencies
+### `npm run eject`
 
-### Running `app.py`
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-1. Standalone: `python app.py`
-2. Run in Docker: `./run_docker.sh`
-3. Run in Kubernetes: `./run_kubernetes.sh`
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-### Kubernetes Steps
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-- Setup and Configure Docker locally
-- Setup and Configure Kubernetes locally
-- Create Flask app in Container
-- Run via kubectl
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
