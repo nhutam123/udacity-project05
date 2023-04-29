@@ -100,7 +100,11 @@ jobs:
             mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
             echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
             kubectl version --short --client
-
+      - run:
+          name: create cluster
+          command: |
+            chmod +x run_kubernetes.sh
+            ./run_kubernetes.sh
       - run:
           name: deployment app
           command: |
@@ -123,11 +127,7 @@ jobs:
       #     command: |
       #       chmod +x delete_exist_cluster.sh
       #       ./delete_exist_cluster.sh
-      - run:
-          name: create cluster
-          command: |
-            chmod +x run_kubernetes.sh
-            ./run_kubernetes.sh
+
   deployment-cluster:
     executor: node
     working_directory: ~/udacity-project05
