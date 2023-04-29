@@ -119,6 +119,11 @@ jobs:
             echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
             kubectl version --short --client
       - run:
+          name: get pods
+          command: |
+            kubectl get pods
+            kubectl get nodes
+      - run:
           name: deployment app
           command: |
             kubectl apply -f deployment.yml
