@@ -56,3 +56,11 @@ jobs:
             docker tag my-project05 tamln2/my-project05:latest
             echo $DOCKER_PASS | docker login -u tamln2 --password-stdin
             docker push tamln2/my-project05:latest
+
+workflows:
+  default:
+    jobs:
+      - build
+      - build-image:
+          requires:
+            - build
