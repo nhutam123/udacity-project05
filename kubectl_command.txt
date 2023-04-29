@@ -1,0 +1,7 @@
+deploy app:
+	kubectl apply -f deployment.yml
+
+attack elb: 
+	kubectl apply -f services.yml
+get elb url:
+	kubectl get services elb
