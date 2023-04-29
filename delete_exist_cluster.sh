@@ -1,0 +1,1 @@
+eksctl delete cluster --name app-demo --region us-east-1

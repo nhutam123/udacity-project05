@@ -90,14 +90,18 @@ jobs:
             tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
             sudo mv /tmp/eksctl /usr/local/bin
       - run:
+          name: delete exist cluster
+          command: |
+            chmod +x delete_exist_cluster.sh
+            ./delete_exist_cluster.sh
+      - run:
           name: create cluster
           command: |
             chmod +x run_kubernetes.sh
             ./run_kubernetes.sh
-  deployment-cluster1:
+  deployment-cluster:
     executor: node
     working_directory: ~/udacity-project05
-
     steps:
       - checkout
       - add_ssh_keys:
@@ -117,8 +121,9 @@ jobs:
       - run:
           name: create cluster
           command: |
-            chmod +x run_kubernetes.sh
-            ./run_kubernetes.sh
+            kubectl apply -f deployment.yml
+            kubectl apply -f services.yml
+            kubectl get services elb
 
 workflows:
   default:
@@ -130,3 +135,6 @@ workflows:
       - create-cluster:
           requires:
             - build-image
+      - deployment-cluster:
+          requires:
+            - create-cluster
