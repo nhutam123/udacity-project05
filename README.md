@@ -1,3 +1,6 @@
+<include a CircleCI status badge, here>
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/nhutam123/udacity-project04/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/nhutam123/udacity-project05/tree/main)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
