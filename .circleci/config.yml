@@ -100,11 +100,7 @@ jobs:
             mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
             echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
             kubectl version --short --client
-      - run:
-          name: get pods
-          command: |
-            kubectl get pods
-            kubectl get nodes
+
       - run:
           name: deployment app
           command: |
@@ -113,6 +109,11 @@ jobs:
           name: attack to  elb
           command: |
             kubectl apply -f services.yml
+      - run:
+          name: get pods
+          command: |
+            kubectl get pods
+            kubectl get nodes
       - run:
           name: get elb url
           command: |
