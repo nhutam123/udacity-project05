@@ -66,13 +66,22 @@ jobs:
     working_directory: ~/udacity-project05
 
     steps:
-      - kubernetes/install:
-          kubectl-version: v1.22.0
       - checkout
       - add_ssh_keys:
           fingerprints: ["15:35:ce:d6:9d:38:06:0d:d1:4d:df:42:7f:95:9a:16"]
       - run:
-          name: Build and push Docker image
+          name: install kubectl
+          command: |
+            curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.26.2/2023-03-17/bin/linux/amd64/kubectl
+            curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.26.2/2023-03-17/bin/linux/amd64/kubectl.sha256
+            sha256sum -c kubectl.sha256
+            openssl sha1 -sha256 kubectl
+            chmod +x ./kubectl
+            mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+            echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+            kubectl version --short --client
+      - run:
+          name: create cluster
           command: |
             chmod +x run_kubernetes.sh
             ./run_kubernetes.sh
