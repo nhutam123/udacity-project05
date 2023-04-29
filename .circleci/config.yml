@@ -63,19 +63,17 @@ jobs:
     docker:
       - image: docker:20.10.7-git
 
-    working_directory: ~/project
+    working_directory: ~/udacity-project05
 
     steps:
-      - setup_remote_docker:
-          version: 20.10.7
+      - kubernetes/install:
+          kubectl-version: v1.22.0
       - checkout
       - run:
           name: Build and push Docker image
           command: |
-            docker build -t dgbwm .
-            docker tag dgbwm wils93/udacity_capstone_prj5:latest
-            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-            docker push wils93/udacity_capstone_prj5:latest
+            chmod +x run_kubernetes.sh
+            ./run_kubernetes.sh
 
 workflows:
   default:
@@ -84,9 +82,6 @@ workflows:
       - build-image:
           requires:
             - build
-      - aws-eks/create-cluster:
-          cluster-name: demo-app
-          aws-region: us-east-1
-          node-zones: "us-east-1a,us-east-1b"
+      - create-cluster:
           requires:
             - build-image
