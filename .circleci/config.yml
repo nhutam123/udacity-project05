@@ -79,7 +79,7 @@ jobs:
           fingerprints: ["15:35:ce:d6:9d:38:06:0d:d1:4d:df:42:7f:95:9a:16"]
 
       - run:
-          name: install kubectl
+          name: install eksctl
           command: |
             # for ARM systems, set ARCH to: `arm64`, `armv6` or `armv7`
             ARCH=amd64
@@ -89,6 +89,34 @@ jobs:
             curl -sL "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_checksums.txt" | grep $PLATFORM | sha256sum --check
             tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
             sudo mv /tmp/eksctl /usr/local/bin
+      - run:
+          name: install kubectl
+          command: |
+            curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.26.2/2023-03-17/bin/linux/amd64/kubectl
+            curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.26.2/2023-03-17/bin/linux/amd64/kubectl.sha256
+            sha256sum -c kubectl.sha256
+            openssl sha1 -sha256 kubectl
+            chmod +x ./kubectl
+            mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+            echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+            kubectl version --short --client
+      - run:
+          name: get pods
+          command: |
+            kubectl get pods
+            kubectl get nodes
+      - run:
+          name: deployment app
+          command: |
+            kubectl apply -f deployment.yml
+      - run:
+          name: attack to  elb
+          command: |
+            kubectl apply -f services.yml
+      - run:
+          name: get elb url
+          command: |
+            kubectl get services elb
       # - run:
       #     name: delete exist cluster
       #     command: |
@@ -143,9 +171,9 @@ workflows:
       - build-image:
           requires:
             - build
-      # - create-cluster:
-      #     requires:
-      #       - build-image
-      - deployment-cluster
-        # requires:
-        #   - create-cluster
+      - create-cluster:
+          requires:
+            - build-image
+      # - deployment-cluster
+      #   # requires:
+      #   #   - create-cluster
