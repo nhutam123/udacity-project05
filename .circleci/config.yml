@@ -119,10 +119,17 @@ jobs:
             echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
             kubectl version --short --client
       - run:
-          name: create cluster
+          name: deployment app
           command: |
             kubectl apply -f deployment.yml
             kubectl apply -f services.yml
+      - run:
+          name: attack to  elb
+          command: |
+            kubectl apply -f services.yml
+      - run:
+          name: get elb url
+          command: |
             kubectl get services elb
 
 workflows:
@@ -132,9 +139,9 @@ workflows:
       - build-image:
           requires:
             - build
-      - create-cluster:
-          requires:
-            - build-image
-      - deployment-cluster:
-          requires:
-            - create-cluster
+      # - create-cluster:
+      #     requires:
+      #       - build-image
+      - deployment-cluster
+        # requires:
+        #   - create-cluster
