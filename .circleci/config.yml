@@ -122,7 +122,6 @@ jobs:
           name: deployment app
           command: |
             kubectl apply -f deployment.yml
-            kubectl apply -f services.yml
       - run:
           name: attack to  elb
           command: |
