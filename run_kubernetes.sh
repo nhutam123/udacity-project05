@@ -8,7 +8,7 @@ dockerpath=tamln2/my-project05:latest
 
 # Step 2
 # Run the Docker Hub container with kubernetes
-kubectl run my-project --image=$dockerpath --port=8080
+kubectl run my-project05 --image=$dockerpath --port=8080
 
 # Step 3:
 # List kubernetes pods
