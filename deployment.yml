@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: demo-app
-          image: tamln2/my-project:latest
+          image: tamln2/my-project05:latest
           ports:
             - containerPort: 80
