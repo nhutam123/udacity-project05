@@ -87,6 +87,6 @@ workflows:
       - aws-eks/create-cluster:
           cluster-name: demo-app
           aws-region: us-east-1
-          aws-zone-name: us-east-1a, us-east-1b
+          node-zones: us-east-1a, us-east-1b
           requires:
             - build-image
