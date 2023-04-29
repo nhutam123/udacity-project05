@@ -89,11 +89,11 @@ jobs:
             curl -sL "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_checksums.txt" | grep $PLATFORM | sha256sum --check
             tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
             sudo mv /tmp/eksctl /usr/local/bin
-      - run:
-          name: delete exist cluster
-          command: |
-            chmod +x delete_exist_cluster.sh
-            ./delete_exist_cluster.sh
+      # - run:
+      #     name: delete exist cluster
+      #     command: |
+      #       chmod +x delete_exist_cluster.sh
+      #       ./delete_exist_cluster.sh
       - run:
           name: create cluster
           command: |
