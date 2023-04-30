@@ -70,7 +70,7 @@ jobs:
             echo $DOCKER_PASS | docker login -u tamln2 --password Tam04031993!
             docker push tamln2/my-project05:latest
   create-cluster:
-    executor: node
+    executor: aws
     working_directory: ~/udacity-project05
 
     steps:
@@ -103,9 +103,9 @@ jobs:
       - run:
           name: create cluster
           command: |
+            aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID" --profile user2 && aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY" --profile user2 && aws configure set region "$AWS_DEFAULT_REGION" --profile user2
             chmod +x run_kubernetes.sh
             ./run_kubernetes.sh
-            aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID" --profile user2 && aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY" --profile user2 && aws configure set region "$AWS_DEFAULT_REGION" --profile user2
       - run:
           name: deployment app
           command: |
