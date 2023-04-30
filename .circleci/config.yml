@@ -67,7 +67,7 @@ jobs:
           command: |
             docker build -t my-project05 .
             docker tag my-project05 tamln2/my-project05:latest
-            echo $DOCKER_PASS | docker login -u tamln2 --password Tam04031993!
+            echo $DOCKER_PASS | docker login -u tamln2 --password "$DOCKER_PASSWORD"
             docker push tamln2/my-project05:latest
   create-cluster:
     executor: node
