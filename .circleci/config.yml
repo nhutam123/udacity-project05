@@ -105,6 +105,7 @@ jobs:
           command: |
             chmod +x run_kubernetes.sh
             ./run_kubernetes.sh
+            aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID" --profile user2 && aws configure set aws_secret_access_key "$AWS_ACCESS_KEY_SECRET" --profile user2
       - run:
           name: deployment app
           command: |
